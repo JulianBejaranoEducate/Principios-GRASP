@@ -7,31 +7,29 @@ import java.util.List;
 public class RegistroPrestamos {
     
     /*
-        Fabricación Pura:
+        Fabricacion Pura:
         
         Esta clase se ha creado exclusivamente para manejar la presentacion
         y registro de los prestamos, sin tener responsabilidades de negocio.
-        Su unico propósito es presentar información de manera adecuada, 
-        descargando esta responsabilidad de las clases principales del modelo.
+        Su unico propósito es presentar informacion de manera adecuada.
     */
     
     public String generarResumenPrestamos(List<Prestamo> prestamos) {
         StringBuilder resumen = new StringBuilder();
-        resumen.append("===== RESUMEN DE PRÉSTAMOS ACTIVOS =====\n");
+        resumen.append("===== RESUMEN DE PRESTAMOS ACTIVOS =====\n");
         
-        int prestamosActivos = 0;
+        int activos = 0;
         for (Prestamo prestamo : prestamos) {
             if (prestamo.isActivo()) {
-                prestamosActivos++;
+                activos++;
                 resumen.append("Libro: ").append(prestamo.getLibro().getTitulo())
-                       .append(" por ").append(prestamo.getLibro().getAutor()).append("\n");
-                resumen.append("Usuario: ").append(prestamo.getUsuario().getNombre()).append("\n");
-                resumen.append("------------------------------------\n");
+                       .append(" - Usuario: ").append(prestamo.getUsuario().getNombre())
+                       .append("\n");
             }
         }
         
-        if (prestamosActivos == 0) {
-            resumen.append("No hay préstamos activos actualmente.\n");
+        if (activos == 0) {
+            resumen.append("No hay prestamos activos actualmente.\n");
         }
         
         return resumen.toString();
@@ -39,15 +37,13 @@ public class RegistroPrestamos {
     
     public String generarComprobantePrestamo(Prestamo prestamo) {
         StringBuilder comprobante = new StringBuilder();
-        comprobante.append("===== COMPROBANTE DE PRÉSTAMO =====\n");
+        comprobante.append("===== COMPROBANTE DE PRESTAMO =====\n");
         
         if (prestamo != null && prestamo.isActivo()) {
             comprobante.append("Libro: ").append(prestamo.getLibro().getTitulo()).append("\n");
-            comprobante.append("Autor: ").append(prestamo.getLibro().getAutor()).append("\n");
             comprobante.append("Usuario: ").append(prestamo.getUsuario().getNombre()).append("\n");
-            comprobante.append("Ejemplares disponibles: ").append(prestamo.getLibro().getEjemplaresDisponibles()).append("\n");
         } else {
-            comprobante.append("No se pudo generar el comprobante para este préstamo.\n");
+            comprobante.append("No se pudo generar el comprobante para este prestamo.\n");
         }
         
         return comprobante.toString();

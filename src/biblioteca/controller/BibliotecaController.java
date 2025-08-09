@@ -17,24 +17,21 @@ public class BibliotecaController {
         Controlador:
         
         Esta clase actua como intermediario entre la interfaz de usuario (Main)
-        y las clases del modelo (Libro, Usuario, Prestamo). Se encarga de coordinar
-        las operaciones de negocio y delegar responsabilidades a los objetos adecuados.
+        y las clases del modelo. Se encarga de coordinar las operaciones de negocio.
     */
     
     /*
         Indireccion:
-        Este controlador proporciona una capa de indirección entre los objetos
-        del modelo y la interfaz de usuario, permitiendo que estos componente
-        esten desacoplados. Cualquier cambio en el modelo no afectara directamente
-        a la interfaz de usuario y viceversa.
+        
+        Este controlador proporciona una capa de indireccion entre el modelo
+        y la interfaz de usuario, permitiendo que estos componentes esten desacoplados.
     */
     
     /*
         Creador:
         
         El controlador es responsable de crear instancias de Libro, Usuario y Prestamo,
-        ya que tiene toda la información necesaria para su creación y mantiene
-        un registro de estos objetos.
+        ya que tiene toda la informacion necesaria para su creacion.
     */
     
     public BibliotecaController() {
@@ -42,21 +39,14 @@ public class BibliotecaController {
         this.usuarios = new ArrayList<>();
         this.prestamos = new ArrayList<>();
         
-        // Inicializamos la biblioteca con algunos datos de ejemplo
-        inicializarDatos();
+        // Inicializamos con datos de ejemplo
+        crearLibro("El Principito", "Antoine de Saint Exupery", 2);
+        crearLibro("Cien años de soledad", "Gabriel Garcia Marquez", 1);
+        crearUsuario("Juan Perez");
+        crearUsuario("Ana Garcia");
     }
     
-    private void inicializarDatos() {
-        // Crear algunos libros de ejemplo
-        crearLibro("El Principito", "Antoine de Saint-Exupéry", 2);
-        crearLibro("Cien años de soledad", "Gabriel García Márquez", 1);
-        
-        // Crear algunos usuarios de ejemplo
-        crearUsuario("Juan Pérez");
-        crearUsuario("Ana García");
-    }
-    
-    // Métodos para crear objetos "Creator"
+    // Metodos para crear objetos "Creator"
     public Libro crearLibro(String titulo, String autor, int ejemplares) {
         Libro libro = new Libro(titulo, autor, ejemplares);
         libros.add(libro);
@@ -72,44 +62,27 @@ public class BibliotecaController {
     public Prestamo crearPrestamo(Libro libro, Usuario usuario) {
         if (libro != null && usuario != null) {
             Prestamo prestamo = new Prestamo(libro, usuario);
-            
             if (prestamo.realizarPrestamo()) {
                 prestamos.add(prestamo);
                 return prestamo;
             }
         }
-        
         return null;
     }
     
-    // Métodos para realizar operaciones
     public boolean devolverLibro(Libro libro, Usuario usuario) {
-        // Buscar el préstamo activo para este libro y usuario
         for (Prestamo prestamo : prestamos) {
-            if (prestamo.isActivo() &&
-                prestamo.getLibro() == libro &&
+            if (prestamo.isActivo() && 
+                prestamo.getLibro() == libro && 
                 prestamo.getUsuario() == usuario) {
-                
-                // Devolver el libro
-                if (prestamo.devolverLibro()) {
-                    return true;
-                }
+                return prestamo.devolverLibro();
             }
         }
-        
         return false;
     }
     
     // Getters para las listas
-    public List<Libro> getLibros() {
-        return libros;
-    }
-    
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-    
-    public List<Prestamo> getPrestamos() {
-        return prestamos;
-    }
+    public List<Libro> getLibros() { return libros; }
+    public List<Usuario> getUsuarios() { return usuarios; }
+    public List<Prestamo> getPrestamos() { return prestamos; }
 }

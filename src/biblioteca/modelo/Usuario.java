@@ -7,31 +7,23 @@ public class Usuario {
     
     private String nombre;
     private List<Prestamo> prestamos;
-    private int maximoPrestamos;
+    private int maximoPrestamos = 3; // Por defecto, máximo 3 préstamos
     
     /*
         Experto en Informacion:
         
-        La clase Usuario contiene la información sobre un usuario de la biblioteca,
-        incluyendo sus prestamos actuales. Es experta en todo lo relacionado con
-        los datos del usuario y su capacidad para solicitar nuevos prestamos.
+        La clase Usuario contiene la informacion sobre un usuario de la biblioteca,
+        incluyendo sus préstamos actuales. Es experta en todo lo relacionado con
+        los datos del usuario y su capacidad para solicitar nuevos préstamos.
     */
     
     public Usuario(String nombre) {
         this.nombre = nombre;
         this.prestamos = new ArrayList<>();
-        this.maximoPrestamos = 3; // Por defecto, un usuario puede tener hasta 3 préstamos
     }
     
-    /*
-        Verifica si el usuario puede solicitar más préstamos
-    */
-    public boolean puedePrestar() {
-        return prestamos.size() < maximoPrestamos;
-    }
-
     public boolean agregarPrestamo(Prestamo prestamo) {
-        if (puedePrestar()) {
+        if (prestamos.size() < maximoPrestamos) {
             prestamos.add(prestamo);
             return true;
         }
@@ -43,15 +35,5 @@ public class Usuario {
     }
     
     // Getters
-    public String getNombre() {
-        return nombre;
-    }
-    
-    public List<Prestamo> getPrestamos() {
-        return prestamos;
-    }
-    
-    public int getMaximoPrestamos() {
-        return maximoPrestamos;
-    }
+    public String getNombre() { return nombre; }
 }

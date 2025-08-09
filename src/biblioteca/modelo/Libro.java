@@ -9,8 +9,8 @@ public class Libro {
     /*
         Experto en Informacion:
         
-        La clase Libro contiene toda la informacion relacionada con un libro,
-        por lo que es la experta para cualquier operación que necesite estos datos.
+        La clase Libro contiene toda la información relacionada con un libro,
+        por lo que es la experta para cualquier operacion que necesite estos datos.
         Por ejemplo, verificar disponibilidad o actualizar el numero de ejemplares.
     */
     
@@ -18,10 +18,6 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.ejemplaresDisponibles = ejemplaresDisponibles;
-    }
-    
-    public boolean estaDisponible() {
-        return ejemplaresDisponibles > 0;
     }
     
     public boolean prestar() {
@@ -32,23 +28,12 @@ public class Libro {
         return false;
     }
     
-    /*
-        Aumenta el número de ejemplares disponibles al devolver un libro
-    */
     public void devolver() {
         ejemplaresDisponibles++;
     }
     
     // Getters
-    public String getTitulo() {
-        return titulo;
-    }
-    
-    public String getAutor() {
-        return autor;
-    }
-    
-    public int getEjemplaresDisponibles() {
-        return ejemplaresDisponibles;
-    }
+    public String getTitulo() { return titulo; }
+    public String getAutor() { return autor; }
+    public int getEjemplaresDisponibles() { return ejemplaresDisponibles; }
 }
